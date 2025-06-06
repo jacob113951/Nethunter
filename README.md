@@ -63,23 +63,19 @@ Here is an example configuration file:
 [
   {
     "kernelSource": {
-      "name": "DogDayAndroid",
-      "repo": "https://codeberg.org/DogDayAndroid/android_kernel_xiaomi_thyme",
-      "branch": "lineage-20.0",
-      "device": "thyme"
+      "name": "fogo",
+      "repo": "https://github.com/LineageOS/android_kernel_motorola_sm6375.git",
+      "branch": "lineage-22.2",
+      "device": "fogo"
     },
-    "withKernelSU": false,
+    "withKernelSU": true,
     "toolchains": [
       {
-        "repo": "https://android.googlesource.com/platform/prebuilts/gas/linux-x86",
-        "branch": "master",
-        "name": "gas"
-      },
-      {
-        "repo": "https://gitlab.com/ThankYouMario/android_prebuilts_clang-standalone/",
-        "branch": "11",
+        "repo": "https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/clang+llvm-18.1.8-aarch64-linux-gnu.tar.xz",
+        "branch": "18.1.8",
         "name": "clang"
-      }
+      },
+      
     ],
     "params": {
       "ARCH": "arm64",
@@ -93,9 +89,9 @@ Here is an example configuration file:
   },
   {
     "kernelSource": {
-      "name": "DogDay-KernelSU",
-      "repo": "https://codeberg.org/DogDayAndroid/android_kernel_xiaomi_thyme",
-      "branch": "lineage-20.0",
+      "name": "guacamole",
+      "repo": "https://kali.download/nethunter-images/devices/guacamole/guacamoleb_14_P.32_210127.zip",
+      "branch": "14",
       "device": "thyme"
     },
     "withKernelSU": true,
