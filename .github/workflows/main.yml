@@ -1,63 +1,4 @@
-<div align = center>
 
-<img src="./.assets/DogDayAndroid.png" width="200" height="175" alt="banner">
-
-<h1>Build Your Own Kernel with Github Action</h1>
-
-English | [中文](./README_cn.md)
-
-![License](https://img.shields.io/static/v1?label=License&message=BY-NC-SA&logo=creativecommons&color=green)
-![Language](https://img.shields.io/github/languages/top/DogDayAndroid/Android-Kernel-Builder)
-![Issues](https://img.shields.io/github/issues/DogDayAndroid/Android-Kernel-Builder)
-![Pull Requests](https://img.shields.io/github/issues-pr/DogDayAndroid/Android-Kernel-Builder)
-<br>
-
-This Github Action helps you build kernels. It reads multiple kernel sources from a configuration file and builds them using different toolchains. Additionally, it supports patching the kernel with KernelSU and uploading the built kernel image.
-<br>
-
----
-
-**[<kbd> <br>  Configure  <br> </kbd>](#configuration-file-syntax)** 
-**[<kbd> <br>  Quick Start  <br> </kbd>](#how-to-use)** 
-**[<kbd> <br>  Local testing  <br> </kbd>](#local-testing)**
-
----
-</div>
-
-# Github Action
-
-This action contains two jobs: `Set-repos` and `Build-Kernel`.
-
-The `Set-repos` job reads the kernel sources from the configuration file and outputs them to the `Build-Kernel` job. The `Build-Kernel` job uses the outputted kernel sources to build the kernels and upload the built kernel images.
-
-## Trigger
-
-| Event name        | Description  |
-| ----------------- | ------------ |
-| workflow_dispatch | Manually run |
-
-## Workflow
-
-| Build Step                 | Description                                    |
-| -------------------------- | ---------------------------------------------- |
-| Checkout                   | Check out code                                 |
-| Generate Matrix            | Generate kernel source matrix from config file |
-| Create working dir         | Create working directory                       |
-| Install prerequisites      | Install necessary dependencies for build       |
-| Clone kernel source        | Clone kernel source code                       |
-| Get toolchains             | Get toolchains                                 |
-| Set args                   | Set build arguments                            |
-| Update KernelSU (optional) | Patch kernel with KernelSU                     |
-| Make defconfig             | Generate kernel configuration file             |
-| Build kernel               | Build kernel                                   |
-| Upload Image               | Upload kernel image                            |
-| Upload Image.gz            | Upload compressed kernel image                 |
-| Upload dtb                 | Upload device tree blob file                   |
-| Upload dtbo.img            | Upload device tree overlay file                |
-
-## Configuration File Syntax
-
-Here is an example configuration file:
 
 ```json
 [
@@ -87,38 +28,7 @@ Here is an example configuration file:
       "CC": "clang"
     }
   },
-  {
-    "kernelSource": {
-      "name": "guacamole",
-      "repo": "https://kali.download/nethunter-images/devices/guacamole/guacamoleb_14_P.32_210127.zip",
-      "branch": "14",
-      "device": "thyme"
-    },
-    "withKernelSU": true,
-    "toolchains": [
-      {
-        "repo": "https://android.googlesource.com/platform/prebuilts/gas/linux-x86",
-        "branch": "master",
-        "name": "gas"
-      },
-      {
-        "repo": "https://gitlab.com/ThankYouMario/android_prebuilts_clang-standalone/",
-        "branch": "11",
-        "name": "clang"
-      }
-    ],
-    "params": {
-      "ARCH": "arm64",
-      "CROSS_COMPILE": "aarch64-linux-gnu-",
-      "CROSS_COMPILE_ARM32": "arm-linux-gnueabi-",
-      "CROSS_COMPILE_COMPAT": "arm-linux-gnueabi-",
-      "CLANG_TRIPLE": "aarch64-linux-gnu-",
-      "AR": "",
-      "CC": "clang"
-    }
-  }
-]
-```
+
 
 This JSON code describes a build configuration that includes the following:
 
